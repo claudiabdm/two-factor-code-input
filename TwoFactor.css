@@ -1,0 +1,55 @@
+.code {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.code__digits {
+  --total-digits: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--total-digits), 1fr);
+  gap: 0.5rem;
+}
+.code__digit {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  padding: 0.625rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .code__digit {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.code__digit:focus {
+  outline-offset: 2px;
+}
+.code__button {
+  margin: 1.5rem auto auto;
+  height: 1.75rem;
+  width: 100%;
+  max-width: 15rem;
+}
+.code__button:hover {
+  cursor: pointer;
+}
+
+.invalid {
+  border-color: red;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
