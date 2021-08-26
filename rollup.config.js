@@ -1,16 +1,7 @@
-import styles from 'rollup-plugin-styles';
+import html from '@web/rollup-plugin-html';
 
-export default {
-	input: 'src/main.js',
-	output: {
-		file: 'dist/bundle.js',
-		format: 'esm',
-    assetFileNames: "[name][extname]",
-	},
-	plugins: [
-		styles({
-      mode: ['extract'],
-      minimize: true,
-    })
-	],
-};
+export default [{
+	input: 'src/index.html',
+	output: { dir: 'dist' },
+	plugins: [html({ minify: true })],
+}];
