@@ -44,7 +44,6 @@ TwoFactor.prototype.render = function () {
     input.ariaLabel = `Digit ${idx}`;
     input.ariaRequired = 'true';
     input.dataset.idx = idx;
-    input.inputMode = 'numeric';
     return input;
   }
 
