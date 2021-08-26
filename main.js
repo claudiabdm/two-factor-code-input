@@ -1,4 +1,6 @@
-import { TwoFactor, validateNumericInputs, focusElement } from './TwoFactor.js';
+'use strict';
+
+import { TwoFactor } from './TwoFactor.js';
 
 // -------------------
 // Create instances
@@ -22,13 +24,13 @@ myOtherTwoFactor.form.addEventListener(
 	submitCode(myOtherTwoFactor, randomCode2, result2)
 );
 
-function submitCode(twoFactor, code, result) {
+function submitCode(twoFactorInstance, code, result) {
 	return function handleSubmit(e) {
 		e.preventDefault();
 		let areInputsValid = true;
 		let inputCode = '';
-		for (let input of twoFactor.inputs) {
-			if (validateNumericInputs(input) === false) {
+		for (let input of twoFactorInstance.inputs) {
+			if (TwoFactor.validateNumericInput(input) === false) {
 				areInputsValid = false;
 			}
 			inputCode += input.value;
@@ -37,14 +39,14 @@ function submitCode(twoFactor, code, result) {
 		if (areInputsValid) {
 			if (inputCode == code) {
 				result.textContent = 'Submitted!';
-				twoFactor.form.reset();
+				twoFactorInstance.form.reset();
 			} else {
 				result.textContent = 'Error: Code does not match';
-				focusElement(twoFactor.inputs[0]);
+				TwoFactor.focusElement(twoFactorInstance.inputs[0]);
 			}
 		} else {
 			result.textContent = 'Error: Invalid inputs';
-			focusElement(twoFactor.inputs[0]);
+			TwoFactor.focusElement(twoFactorInstance.inputs[0]);
 		}
 	};
 }

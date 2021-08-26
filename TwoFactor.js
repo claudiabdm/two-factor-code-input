@@ -1,4 +1,5 @@
-export { TwoFactor, validateNumericInputs, focusElement };
+'use strict';
+export { TwoFactor };
 
 /**
  * Creates Two Factor input code component.
@@ -13,6 +14,7 @@ function TwoFactor(wrapper, totalDigits) {
   this.inputs = [];
   this._render();
 }
+
 
 /**
  * Renders TwoFactor components.
@@ -73,6 +75,29 @@ TwoFactor.prototype._render = function () {
 };
 
 /**
+ * Validates that input is a number.
+ * @param {HTMLInputElement} input  - HTML input.
+ * @returns {(number | false)} - If input number returns value otherwise returns false.
+ */
+TwoFactor.validateNumericInput = function validateNumericInput(input) {
+  if (isNaN(Number(input.value)) || input.value === '') {
+    input.classList.add('invalid');
+    return false;
+  }
+  input.classList.remove('invalid');
+  return input.value.length > 1 ? input.value[0] : input.value;
+};
+
+/**
+ * Focus and select input value.
+ * @param {Element} elem  - HTML element.
+ */
+TwoFactor.focusElement = function focusElement(elem) {
+  elem.focus();
+  elem.select();
+};
+
+/**
  * Add event listeners to form element.
  */
 function addEvents() {
@@ -83,7 +108,7 @@ function addEvents() {
 
   function checkInput(thisTwoFactor) {
     return function handleNumericInput(e) {
-      const value = validateNumericInputs(e.target);
+      const value = TwoFactor.validateNumericInput(e.target);
       if (value !== false) {
         e.target.value = value;
         focusNextInput.call(thisTwoFactor, e.target);
@@ -95,7 +120,7 @@ function addEvents() {
 
   function handleClickInput(e) {
     if (e.target.tagName == 'INPUT') {
-      focusElement(e.target);
+      TwoFactor.focusElement(e.target);
     }
   }
 
@@ -110,8 +135,8 @@ function addEvents() {
       setTimeout(() => {
         thisTwoFactor.form.elements['submitButton'].focus();
         for (let input of thisTwoFactor.inputs) {
-          if (validateNumericInputs(input) === false) {
-            focusElement(input);
+          if (TwoFactor.validateNumericInput(input) === false) {
+            TwoFactor.focusElement(input);
             break;
           }
         }
@@ -145,35 +170,12 @@ function addEvents() {
 }
 
 /**
- * Validates that input is a number.
- * @param {HTMLInputElement} input  - HTML input.
- * @returns {(number | false)} - If input number returns value otherwise returns false.
- */
-function validateNumericInputs(input) {
-  if (isNaN(Number(input.value)) || input.value === '') {
-    input.classList.add('invalid');
-    return false;
-  }
-  input.classList.remove('invalid');
-  return input.value.length > 1 ? input.value[0] : input.value;
-};
-
-/**
- * Focus and select input value.
- * @param {Element} elem  - HTML element.
- */
-function focusElement(elem) {
-  elem.focus();
-  elem.select();
-};
-
-/**
  * Focus next input sibling.
  * * @param {HTMLInputElement} - Current input
  */
 function focusNextInput(currentInput) {
   if (currentInput.nextElementSibling) {
-    focusElement(currentInput.nextElementSibling);
+    TwoFactor.focusElement(currentInput.nextElementSibling);
   }
 }
 
@@ -183,6 +185,6 @@ function focusNextInput(currentInput) {
  */
 function focusPrevInput(currentInput) {
   if (currentInput.previousElementSibling) {
-    focusElement(currentInput.previousElementSibling);
+    TwoFactor.focusElement(currentInput.previousElementSibling);
   }
 }
