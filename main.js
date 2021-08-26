@@ -5,10 +5,10 @@ import { TwoFactor } from './TwoFactor.js';
 // -------------------
 const randomCode1 = generateRandomCode(4, 1);
 const randomCode2 = generateRandomCode(6, 2);
-const result1 = document.getElementById("result1");
-const result2 = document.getElementById("result2");
-const wrapper1 = document.getElementById("myTwoFactor");
-const wrapper2 = document.getElementById("myOthertwoFactor");
+const result1 = document.getElementById('result1');
+const result2 = document.getElementById('result2');
+const wrapper1 = document.getElementById('myTwoFactor');
+const wrapper2 = document.getElementById('myOthertwoFactor');
 
 const myTwoFactor = new TwoFactor(wrapper1, 4);
 myTwoFactor.render();
@@ -19,12 +19,9 @@ myOtherTwoFactor.render();
 // -------------------
 // Add custom submit
 // -------------------
-myTwoFactor.form.addEventListener(
-	"submit",
-	submitCode(myTwoFactor, randomCode1, result1)
-);
+myTwoFactor.form.addEventListener('submit', submitCode(myTwoFactor, randomCode1, result1));
 myOtherTwoFactor.form.addEventListener(
-	"submit",
+	'submit',
 	submitCode(myOtherTwoFactor, randomCode2, result2)
 );
 
@@ -32,9 +29,9 @@ function submitCode(twoFactor, code, result) {
 	return function handleSubmit(e) {
 		e.preventDefault();
 		let areInputsValid = true;
-		let inputCode = "";
+		let inputCode = '';
 		for (let input of twoFactor.inputs) {
-			if (twoFactor.validateNumericInputs(input) === false) {
+			if (validateNumericInputs(input) === false) {
 				areInputsValid = false;
 			}
 			inputCode += input.value;
@@ -42,15 +39,15 @@ function submitCode(twoFactor, code, result) {
 		}
 		if (areInputsValid) {
 			if (inputCode == code) {
-				result.textContent = "Submitted!";
-				twoFactor.form.reset();
+				result.textContent = 'Submitted!';
+				form.reset();
 			} else {
-				result.textContent = "Error: Code does not match";
-				twoFactor.focusElement(twoFactor.inputs[0]);
+				result.textContent = 'Error: Code does not match';
+				focusElement(twoFactor.inputs[0]);
 			}
 		} else {
-			result.textContent = "Error: Invalid inputs";
-			twoFactor.focusElement(twoFactor.inputs[0]);
+			result.textContent = 'Error: Invalid inputs';
+			focusElement(twoFactor.inputs[0]);
 		}
 	};
 }
