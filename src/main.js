@@ -1,5 +1,6 @@
 'use strict';
-
+import './styles/styles.css';
+import './TwoFactor.css';
 import { TwoFactor } from './TwoFactor.js';
 
 // -------------------
