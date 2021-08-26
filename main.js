@@ -1,4 +1,4 @@
-import { TwoFactor } from './TwoFactor.js';
+import { TwoFactor, validateNumericInputs, focusElement } from './TwoFactor.js';
 
 // -------------------
 // Create instances
@@ -37,7 +37,7 @@ function submitCode(twoFactor, code, result) {
 		if (areInputsValid) {
 			if (inputCode == code) {
 				result.textContent = 'Submitted!';
-				form.reset();
+				twoFactor.form.reset();
 			} else {
 				result.textContent = 'Error: Code does not match';
 				focusElement(twoFactor.inputs[0]);
