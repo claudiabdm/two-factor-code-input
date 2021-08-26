@@ -11,12 +11,13 @@ function TwoFactor(wrapper, totalDigits) {
   this.totalDigits = totalDigits;
   this.form = null;
   this.inputs = [];
+  this._render();
 }
 
 /**
  * Renders TwoFactor components.
  */
-TwoFactor.prototype.render = function () {
+TwoFactor.prototype._render = function () {
   const inputsWrapper = createInputsWrapper.call(this, this.totalDigits);
   const submitButton = createSubmitButton();
 

@@ -7,7 +7,6 @@ describe('Two Factor', () => {
 	const twoFactor = new TwoFactor(wrapper, 4);
 	it('should render Two Factor', () => {
 		expect(twoFactor).toBeTruthy();
-		twoFactor.render();
 		expect(wrapper.children[0].className).toBe('code');
 	});
 

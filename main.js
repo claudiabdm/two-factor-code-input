@@ -11,10 +11,7 @@ const wrapper1 = document.getElementById('myTwoFactor');
 const wrapper2 = document.getElementById('myOthertwoFactor');
 
 const myTwoFactor = new TwoFactor(wrapper1, 4);
-myTwoFactor.render();
-
 const myOtherTwoFactor = new TwoFactor(wrapper2, 6);
-myOtherTwoFactor.render();
 
 // -------------------
 // Add custom submit
