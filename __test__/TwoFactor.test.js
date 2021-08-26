@@ -7,8 +7,8 @@ describe('Two Factor', () => {
 	const twoFactor = new TwoFactor(wrapper, 4);
 	it('should render Two Factor', () => {
 		expect(twoFactor).toBeTruthy();
-    twoFactor.render();
-    expect(wrapper.children[0].className).toBe('code');
+		twoFactor.render();
+		expect(wrapper.children[0].className).toBe('code');
 	});
 
 	it('should be false if input is not number', () => {
@@ -18,27 +18,26 @@ describe('Two Factor', () => {
 		expect(inputInvalid).toBe(false);
 	});
 
-  it('should be input value if input is number', () => {
+	it('should be input value if input is number', () => {
 		const input = document.createElement('input');
 		input.value = 1;
 		const inputValid = validateNumericInputs(input);
 		expect(inputValid).toBe('1');
 	});
 
-  it('should be first digit input value', () => {
+	it('should be first digit input value', () => {
 		const input = document.createElement('input');
 		input.value = 234;
 		const inputValid = validateNumericInputs(input);
 		expect(inputValid).toBe('2');
 	});
 
-  it('should call focus and select from element', () => {
+	it('should call focus and select from element', () => {
 		const input = document.createElement('input');
-    spyOn(input, 'focus');
-    spyOn(input, 'select');
+		spyOn(input, 'focus');
+		spyOn(input, 'select');
 		focusElement(input);
 		expect(input.focus).toHaveBeenCalled();
-    expect(input.select).toHaveBeenCalled();
+		expect(input.select).toHaveBeenCalled();
 	});
-
 });
