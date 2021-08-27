@@ -1,6 +1,5 @@
 'use strict';
 import { TwoFactor } from './TwoFactor.js';
-
 // -------------------
 // Create instances
 // -------------------
